@@ -1,6 +1,11 @@
 import 'package:flutter/material.dart';
 
 class AddCheesePage extends StatelessWidget {
+  late TextEditingController name;
+  late TextEditingController origin;
+  late TextEditingController history;
+  late TextEditingController agingWindow;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -13,24 +18,18 @@ class AddCheesePage extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             TextField(
-              decoration: const InputDecoration(
-                labelText: "Name",
-                border: OutlineInputBorder(),
-              ),
+              controller: name,
+              decoration: const InputDecoration(labelText: "Name", border: OutlineInputBorder())
             ),
             const SizedBox(height: 16),
             TextField(
-              decoration: const InputDecoration(
-                labelText: "Origin",
-                border: OutlineInputBorder(),
-              ),
+              controller: origin,
+              decoration: const InputDecoration(labelText: "Origin", border: OutlineInputBorder())
             ),
             const SizedBox(height: 16),
             TextField(
-              decoration: const InputDecoration(
-                labelText: "Aging Window",
-                border: OutlineInputBorder(),
-              ),
+              controller: agingWindow,
+              decoration: const InputDecoration(labelText: "Aging Window", border: OutlineInputBorder())
             ),
             // Add more TextFields as needed for other properties...
             const SizedBox(height: 16),
