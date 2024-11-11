@@ -1,0 +1,74 @@
+[
+  {
+    "name": "Parmigiano Reggiano",
+    "origin": "Emilia-Romagna and Lombardy, Italy",
+    "agingWindow": "12-36",
+    "animal": ["cow"],
+    "traditionallyRaw": true,
+    "flavorProfile": ["Nutty", "savory"],
+    "texture": ["Hard", "granular"],
+    "usage": ["grated on pasta", "risottos", "cheese boards"],
+    "history": "Parmigiano Reggiano has a rich history dating back to the Middle Ages, with its origins traceable to the 12th century. The cheese was first produced by Benedictine monks in the Emilia-Romagna region of Italy. They aimed to create a long-lasting cheese that could be easily transported and stored.\n\nThe name \"Parmigiano Reggiano\" is protected under European law and is classified as a Protected Designation of Origin (PDO) product. This designation ensures that only cheese produced in certain areas, following specific traditional methods, can bear the name. The regions that can produce Parmigiano Reggiano include Parma, Reggio Emilia, Modena, Bologna (to the west of the Reno River), and Mantua (to the south of the Po River).\n\nHistorically, Parmigiano Reggiano was popular among nobility and was often referred to as the \"king of cheeses.\" Its reputation grew throughout Italy and eventually around the world. The production process is still strictly regulated, and each wheel is carefully monitored for quality. After aging, each cheese wheel is inspected, and those that meet the stringent quality standards are branded with a unique mark, ensuring authenticity.\n\nToday, Parmigiano Reggiano remains a staple in Italian cuisine and is highly regarded globally, valued for its complex flavour, versatility in cooking, and the artisanal craftsmanship behind its production.",
+    "imagePath": "images/parmigiano-reggiano.jpeg"
+  },
+  {
+    "name": "Cheddar",
+    "origin": "Somerset, England",
+    "agingWindow": "3-24",
+    "animal": ["cow"],
+    "traditionallyRaw": false,
+    "flavorProfile": ["Sharp", "nutty"],
+    "texture": ["Hard"],
+    "usage": ["sandwiches", "soups", "snack"],
+    "history": "Cheddar cheese has a rich history that dates back to the 12th century, originating from the village of Cheddar in Somerset, England. According to legend, the cheese was discovered when a milkmaid accidentally left milk in a cave, and it curdled due to the natural bacteria present in the cave. The resulting cheese was found to have a unique flavour and texture, leading to the development of what we now know as cheddar.\n\nBy the 16th century, Cheddar cheese was being produced in larger quantities and became widely popular across England. The cheese was originally made in large rounds, and its production spread throughout the country, with various regions developing their own styles and characteristics.\n\nCheddar's popularity continued to grow, and by the 19th century, it was being produced in various regions of the world, including the United States, Canada, and Australia. The cheese became known for its distinctive sharp flavour and crumbly texture, and it has since evolved into many varieties, including mild, sharp, extra sharp, and even flavoured versions with herbs or spices.\n\nToday, Cheddar cheese is one of the most widely consumed cheeses in the world and is a staple in many households. It is used in a variety of culinary applications, from sandwiches and burgers to casseroles and cheese sauces. The cheese has earned a place in both traditional British cuisine and modern international dishes, making it a beloved choice for cheese lovers everywhere.",
+    "imagePath": "images/cheddar.jpeg"
+  },
+  {
+    "name": "Jarlsberg",
+    "origin": "Norway",
+    "agingWindow": "3-6",
+    "animal": ["cow"],
+    "traditionallyRaw": false,
+    "flavorProfile": ["Nutty", "mild", "sweet"],
+    "texture": ["Semi-soft", "elastic"],
+    "usage": ["sandwiches", "soups", "snack"],
+    "history": "Jarlsberg cheese has its origins in Norway, specifically in the region of Østfold, and it was first developed in the 1950s. The cheese was inspired by traditional Swiss Emmental cheese, which the Norwegian cheese-makers sought to replicate while creating a unique Norwegian product.\n\nThe name \"Jarlsberg\" comes from the Jarlsberg estate in the area, where the cheese was originally produced. It was developed by a group of Norwegian dairymen and cheese-makers, who aimed to create a cheese with a mild, nutty flavor and a characteristic, distinctive holes (or \"eyes\") throughout. The holes are formed by the activity of the propionic acid bacteria used in the fermentation process, which produces carbon dioxide gas that creates the bubbles in the curd.\n\nJarlsberg gained international recognition when it was introduced to markets outside of Norway in the late 20th century, particularly in the United States. Its mild, creamy flavor and versatility made it popular for use in sandwiches, cooking, and as a snack cheese.\n\nThe cheese is produced using strict quality controls, and while there are several varieties of Jarlsberg, the original version is still the most recognized and widely consumed. Jarlsberg is often associated with Norwegian cuisine and is a beloved cheese in many parts of the world.\n\nToday, Jarlsberg continues to be a popular cheese choice, known for its smooth texture and mild taste, making it a favorite for cheese platters, melting in dishes, or simply enjoyed on its own.",
+    "imagePath": "images/jarlsberg.jpeg"
+  },
+  {
+    "name": "Grana Padano",
+    "origin": "Northern Italy",
+    "agingWindow": "9-20",
+    "animal": ["cow"],
+    "traditionallyRaw": true,
+    "flavorProfile": ["Nutty", "sweet", "slightly fruity"],
+    "texture": ["Hard", "grainy"],
+    "usage": ["grated on pasta", "risottos", "cheese boards"],
+    "history": "Grana Padano has a long history that dates back to the Middle Ages, with its origins traced to monasteries in the Po River Valley around the 12th century. The cheese was developed by monks who sought to create a durable cheese that could be stored and transported easily, which would be beneficial for both local consumption and trade.\n\nThe name \"Grana\" refers to the cheese's granular texture, while \"Padano\" refers to its origin in the Po Valley (Padan plain). This cheese became widely popular among the population due to its long shelf life and versatility in cooking.\n\nGrana Padano is protected by the Protected Designation of Origin (PDO) status, which means that only cheese produced in specific regions (including parts of Lombardy, Emilia-Romagna, Trentino, and Veneto) using traditional methods can be labeled as Grana Padano. This designation helps ensure the quality and authenticity of the cheese.\n\nGrana Padano is similar to Parmigiano Reggiano but typically has a milder flavor and a slightly softer texture. The cheese is often used as a grating cheese for pasta, risottos, and soups, or enjoyed on its own as part of a cheese platter.\n\nToday, Grana Padano is recognized as one of Italy's most important cheeses and is enjoyed both locally and internationally for its rich flavor and versatility in various culinary applications.",
+    "imagePath": "images/grana-padano.jpeg"
+  },
+  {
+    "name": "Brie",
+    "origin": "Île-de-France, France",
+    "agingWindow": "1-2",
+    "animal": ["cow"],
+    "traditionallyRaw": true,
+    "flavorProfile": ["Creamy", "buttery", "mild"],
+    "texture": ["Soft", "creamy"],
+    "usage": ["cheese boards", "baked dishes", "paired with fruit and bread"],
+    "history": "Brie cheese has a long history, believed to date back to at least the 8th century. It is named after the Brie region of France, where it was traditionally made. The cheese was likely first produced by local farmers, who utilized the abundant cow's milk available in the region.\n\nDuring the 16th century, Brie gained popularity among the French aristocracy. It is said that the cheese was even served to King Louis XIV, further cementing its status as a noble delicacy. The French referred to Brie as the \"Queen of Cheeses,\" highlighting its esteemed position in French gastronomy.\n\nBrie's production methods have evolved over the centuries, but the essence of the cheese remains the same. The cheese is known for its soft, creamy texture and rich, buttery flavor, often accompanied by earthy notes from its rind. It develops a characteristic white, bloomy rind, which is a result of the molds applied during the cheese-making process.\n\nBrie is protected by the Appellation d'Origine Contrôlée (AOC) designation, which ensures that only cheese produced in the specific region using traditional methods can be labeled as \"Brie.\" This protection also extends to various regional varieties of Brie, such as Brie de Meaux and Brie de Melun, each with unique characteristics and flavors.\n\nToday, Brie is enjoyed worldwide and is a staple on cheese boards, in gourmet recipes, and as a popular pairing with fruits, bread, and wines. Its versatility and luxurious taste continue to make it a favorite among cheese lovers.",
+    "imagePath": "images/brie.jpeg"
+  },
+  {
+    "name": "Feta",
+    "origin": "Greece",
+    "agingWindow": "2-3",
+    "animal": ["goat", "sheep"],
+    "traditionallyRaw": true,
+    "flavorProfile": ["salty", "tangy"],
+    "texture": ["crumbly", "creamy"],
+    "usage": ["salads", "Mediterranean dishes", "cheese boards"],
+    "history": "Feta cheese has a rich history that dates back thousands of years, with its origins deeply rooted in ancient Greece. The word \"feta\" comes from the Italian word \"fetta,\" meaning \"slice,\" which refers to the way the cheese is cut for serving. Its production has been documented since the ancient Greeks, who included feta in their diet and considered it a staple food.\n\nFeta is traditionally made in the regions of Greece, particularly in places like Thessaly and the Peloponnese. The cheese is typically produced in large blocks and aged in brine, which helps develop its tangy flavour and crumbly texture. The brining process also contributes to feta's distinctive salty taste.\n\nFeta has enjoyed protected designation status in the European Union since 2002, which means that only cheese produced in Greece following traditional methods can be labelled as \"feta.\" This has helped preserve the quality and authenticity of Greek feta against mass-produced imitations.\n\nFeta's versatility has made it a beloved ingredient in various dishes, such as Greek salads, spanakopita (spinach pie), and numerous Mediterranean recipes. It pairs well with vegetables, fruits, olives, and grains, adding a salty, creamy element to many dishes.\n\nToday, feta is recognized and enjoyed worldwide, celebrated for its unique flavour, crumbly texture, and the traditional methods of production that have been passed down through generations. Its place in Mediterranean cuisine remains significant, embodying the rich culinary heritage of Greece.",
+    "imagePath": "images/feta.jpeg"
+  }
+]
