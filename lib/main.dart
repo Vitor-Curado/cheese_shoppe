@@ -1,27 +1,10 @@
 import 'package:cheese_shoppe/AddCheesePage.dart';
-import 'cheese.dart';
+import 'package:cheese_shoppe/CheeseDao.dart';
+import 'package:cheese_shoppe/Database.dart';
+import 'Cheese.dart';
 import 'package:flutter/material.dart';
 
-// BOTH are necessary. It's a story, really.
-// It all started with my loadCheeses() not working.
-// That's where the error came from.
-// Apparently, it's a problem related to flutter, not me.
-// At first, I used the ffi only, but since I'm running my application
-// on edge, I had to have the ffi_web version alongside the standard FFI one
-// then, there was another problem, SW related, and I had to go to this
-// website: https://github.com/tekartik/sqflite/tree/master/packages_web/sqflite_common_ffi_web#setup-binaries
-// to fix the something worker related. DB something ...
-import 'package:sqflite_common_ffi/sqflite_ffi.dart';
-import 'package:sqflite_common_ffi_web/sqflite_ffi_web.dart';
-
-// my stuff
-import 'cheese.dart';
-
-
 void main() async {
-  // Initialise the database factory
-  // DON'T touch it.
-  databaseFactory = databaseFactoryFfiWeb;
 
   // Run app as usual.
   runApp(const MyApp());
@@ -54,36 +37,41 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-  /*
-  List<Cheese> cheeses = [
-    Cheese(id: 1, name: 'Parmigiano Reggiano', origin: 'Emilia-Romagna and Lombardy, Italy', agingWindow: '12-36', animal: ['Cow'], traditionallyRaw: true, flavorProfile: ['Nutty', 'savory'], texture: ['Hard', 'granular'], usage: ['grated on pasta', 'risottos', 'cheese boards'], history: 'Parmigiano Reggiano has a rich history dating back to the Middle Ages, with its origins traceable to the 12th century. The cheese was first produced by Benedictine monks in the Emilia-Romagna region of Italy. They aimed to create a long-lasting cheese that could be easily transported and stored.\n\nThe name \"Parmigiano Reggiano\" is protected under European law and is classified as a Protected Designation of Origin (PDO) product. This designation ensures that only cheese produced in certain areas, following specific traditional methods, can bear the name. The regions that can produce Parmigiano Reggiano include Parma, Reggio Emilia, Modena, Bologna (to the west of the Reno River), and Mantua (to the south of the Po River).\n\nHistorically, Parmigiano Reggiano was popular among nobility and was often referred to as the \"king of cheeses.\" Its reputation grew throughout Italy and eventually around the world. The production process is still strictly regulated, and each wheel is carefully monitored for quality. After aging, each cheese wheel is inspected, and those that meet the stringent quality standards are branded with a unique mark, ensuring authenticity.\n\nToday, Parmigiano Reggiano remains a staple in Italian cuisine and is highly regarded globally, valued for its complex flavour, versatility in cooking, and the artisanal craftsmanship behind its production.', imagePath: 'images/parmigiano-reggiano.jpeg'),
-    Cheese(id: 2, name: 'Cheddar', origin: 'Somerset, England', agingWindow: '3-24', animal: ['cow'], traditionallyRaw: false, flavorProfile: ['Sharp', 'nutty'], texture: ['Hard'], usage: ['sandwiches', 'soups', 'snack'], history: 'Cheddar cheese has a rich history that dates back to the 12th century, originating from the village of Cheddar in Somerset, England. According to legend, the cheese was discovered when a milkmaid accidentally left milk in a cave, and it curdled due to the natural bacteria present in the cave. The resulting cheese was found to have a unique flavour and texture, leading to the development of what we now know as cheddar.\n\nBy the 16th century, Cheddar cheese was being produced in larger quantities and became widely popular across England. The cheese was originally made in large rounds, and its production spread throughout the country, with various regions developing their own styles and characteristics.\n\nCheddar\'s popularity continued to grow, and by the 19th century, it was being produced in various regions of the world, including the United States, Canada, and Australia. The cheese became known for its distinctive sharp flavour and crumbly texture, and it has since evolved into many varieties, including mild, sharp, extra sharp, and even flavoured versions with herbs or spices.\n\nToday, Cheddar cheese is one of the most widely consumed cheeses in the world and is a staple in many households. It is used in a variety of culinary applications, from sandwiches and burgers to casseroles and cheese sauces. The cheese has earned a place in both traditional British cuisine and modern international dishes, making it a beloved choice for cheese lovers everywhere.', imagePath: 'images/cheddar.jpeg'),
-    Cheese(id: 3, name: 'Jarlsberg', origin: 'Norway', agingWindow: '3-6', animal: ['cow'], traditionallyRaw: false, flavorProfile: ['Nutty', 'mild', 'sweet'], texture: ['Semi-soft', 'elastic'], usage: ['sandwiches', 'soups', 'snack'], history: 'Jarlsberg cheese has its origins in Norway, specifically in the region of Østfold, and it was first developed in the 1950s. The cheese was inspired by traditional Swiss Emmental cheese, which the Norwegian cheese-makers sought to replicate while creating a unique Norwegian product.\n\nThe name \"Jarlsberg\" comes from the Jarlsberg estate in the area, where the cheese was originally produced. It was developed by a group of Norwegian dairymen and cheese-makers, who aimed to create a cheese with a mild, nutty flavor and a characteristic, distinctive holes (or \"eyes\") throughout. The holes are formed by the activity of the propionic acid bacteria used in the fermentation process, which produces carbon dioxide gas that creates the bubbles in the curd.\n\nJarlsberg gained international recognition when it was introduced to markets outside of Norway in the late 20th century, particularly in the United States. Its mild, creamy flavor and versatility made it popular for use in sandwiches, cooking, and as a snack cheese.\n\nThe cheese is produced using strict quality controls, and while there are several varieties of Jarlsberg, the original version is still the most recognized and widely consumed. Jarlsberg is often associated with Norwegian cuisine and is a beloved cheese in many parts of the world.\n\nToday, Jarlsberg continues to be a popular cheese choice, known for its smooth texture and mild taste, making it a favorite for cheese platters, melting in dishes, or simply enjoyed on its own.', imagePath: 'images/jarlsberg.jpeg')
-  ];
-  */
+  /*List<Cheese> cheeses = [
+    Cheese(id: 1, name: 'Parmigiano Reggiano', origin: 'Emilia-Romagna and Lombardy, Italy', agingWindow: '12-36', animal: 'Cow', traditionallyRaw: true, flavorProfile: 'Nutty, savory', texture: 'Hard, granular', usage: 'grated on pasta, risottos, cheese boards', history: 'Parmigiano Reggiano has a rich history dating back to the Middle Ages, with its origins traceable to the 12th century. The cheese was first produced by Benedictine monks in the Emilia-Romagna region of Italy. They aimed to create a long-lasting cheese that could be easily transported and stored.\n\nThe name \"Parmigiano Reggiano\" is protected under European law and is classified as a Protected Designation of Origin (PDO) product. This designation ensures that only cheese produced in certain areas, following specific traditional methods, can bear the name. The regions that can produce Parmigiano Reggiano include Parma, Reggio Emilia, Modena, Bologna (to the west of the Reno River), and Mantua (to the south of the Po River).\n\nHistorically, Parmigiano Reggiano was popular among nobility and was often referred to as the \"king of cheeses.\" Its reputation grew throughout Italy and eventually around the world. The production process is still strictly regulated, and each wheel is carefully monitored for quality. After aging, each cheese wheel is inspected, and those that meet the stringent quality standards are branded with a unique mark, ensuring authenticity.\n\nToday, Parmigiano Reggiano remains a staple in Italian cuisine and is highly regarded globally, valued for its complex flavour, versatility in cooking, and the artisanal craftsmanship behind its production.', imagePath: 'images/parmigiano-reggiano.jpeg'),
+    Cheese(id: 2, name: 'Cheddar', origin: 'Somerset, England', agingWindow: '3-24', animal: 'cow', traditionallyRaw: false, flavorProfile: 'Sharp nutty', texture: 'Hard', usage: 'sandwiches, soups, snack', history: 'Cheddar cheese has a rich history that dates back to the 12th century, originating from the village of Cheddar in Somerset, England. According to legend, the cheese was discovered when a milkmaid accidentally left milk in a cave, and it curdled due to the natural bacteria present in the cave. The resulting cheese was found to have a unique flavour and texture, leading to the development of what we now know as cheddar.\n\nBy the 16th century, Cheddar cheese was being produced in larger quantities and became widely popular across England. The cheese was originally made in large rounds, and its production spread throughout the country, with various regions developing their own styles and characteristics.\n\nCheddar\'s popularity continued to grow, and by the 19th century, it was being produced in various regions of the world, including the United States, Canada, and Australia. The cheese became known for its distinctive sharp flavour and crumbly texture, and it has since evolved into many varieties, including mild, sharp, extra sharp, and even flavoured versions with herbs or spices.\n\nToday, Cheddar cheese is one of the most widely consumed cheeses in the world and is a staple in many households. It is used in a variety of culinary applications, from sandwiches and burgers to casseroles and cheese sauces. The cheese has earned a place in both traditional British cuisine and modern international dishes, making it a beloved choice for cheese lovers everywhere.', imagePath: 'images/cheddar.jpeg'),
+    Cheese(id: 3, name: 'Jarlsberg', origin: 'Norway', agingWindow: '3-6', animal: 'cow', traditionallyRaw: false, flavorProfile: 'Nutty, mild, sweet', texture: 'Semi-soft, elastic', usage: 'sandwiches, soups, snack', history: 'Jarlsberg cheese has its origins in Norway, specifically in the region of Østfold, and it was first developed in the 1950s. The cheese was inspired by traditional Swiss Emmental cheese, which the Norwegian cheese-makers sought to replicate while creating a unique Norwegian product.\n\nThe name \"Jarlsberg\" comes from the Jarlsberg estate in the area, where the cheese was originally produced. It was developed by a group of Norwegian dairymen and cheese-makers, who aimed to create a cheese with a mild, nutty flavor and a characteristic, distinctive holes (or \"eyes\") throughout. The holes are formed by the activity of the propionic acid bacteria used in the fermentation process, which produces carbon dioxide gas that creates the bubbles in the curd.\n\nJarlsberg gained international recognition when it was introduced to markets outside of Norway in the late 20th century, particularly in the United States. Its mild, creamy flavor and versatility made it popular for use in sandwiches, cooking, and as a snack cheese.\n\nThe cheese is produced using strict quality controls, and while there are several varieties of Jarlsberg, the original version is still the most recognized and widely consumed. Jarlsberg is often associated with Norwegian cuisine and is a beloved cheese in many parts of the world.\n\nToday, Jarlsberg continues to be a popular cheese choice, known for its smooth texture and mild taste, making it a favorite for cheese platters, melting in dishes, or simply enjoyed on its own.', imagePath: 'images/jarlsberg.jpeg')
+  ];*/
+
+  late AppDatabase database;
+  late CheeseDao mydao;
   List<Cheese> cheeses = [];
 
   Cheese? selectedCheese;
 
   @override
   void initState() {
-    _loadCheeses();
-    super.initState();
+   super.initState();
+   initDB();
+  }
+
+  // Temporary
+  void initDB () async
+  {
+    database = await $FloorAppDatabase.databaseBuilder('app_database.db').build();
+    mydao = database.cheeseDao;
+
+    var temp  = await mydao.getAllCheeses();
+    setState(() {
+      cheeses = temp;
+    });
   }
 
   @override
   void dispose() {
-    CheeseDatabase.instance.closeDB();
     super.dispose();
   }
 
-  // Load cheeses from the database
-  Future<void> _loadCheeses() async {
-    List<Cheese> loadedCheeses = await CheeseDatabase.instance.loadCheeses();
-    setState(() {
-      cheeses = loadedCheeses;
-    });
-  }
 
   // Big deal function that displays the entire she-bang with all the whistles
   // Heavily inspired by professor Ethan's teachings
@@ -177,12 +165,12 @@ class _MyHomePageState extends State<MyHomePage> {
                             ),
                             const SizedBox(height: 8),
                             Text(
-                              'Animals: ${selectedCheese!.animal.join(', ')}',
+                              'Animals: ${selectedCheese!.animal}',
                               style: const TextStyle(fontSize: 16, fontFamily: 'Courier'),
                             ),
                             const SizedBox(height: 8),
                             Text(
-                              'Texture: ${selectedCheese!.texture.join(', ')}',
+                              'Texture: ${selectedCheese!.texture}',
                               style: const TextStyle(fontSize: 16, fontFamily: 'Courier'),
                             ),
                           ],
@@ -265,9 +253,21 @@ class _MyHomePageState extends State<MyHomePage> {
   // I started off implementing the logic, but then gradually I GPT'd the styling to look like a criminal dossier, or a police file.
   Widget cheeseList() {
     return Container(
-      padding: const EdgeInsets.all(12.0), decoration: BoxDecoration(color: Colors.grey[200], borderRadius: BorderRadius.circular(8), boxShadow: [BoxShadow(color: Colors.grey.withOpacity(0.3), blurRadius: 4, offset: const Offset(0, 2))]),
+      padding: const EdgeInsets.all(12.0),
+      decoration: BoxDecoration(
+        color: Colors.grey[200],
+        borderRadius: BorderRadius.circular(8),
+        boxShadow: [
+          BoxShadow(
+            color: Colors.grey.withOpacity(0.3),
+            blurRadius: 4,
+            offset: const Offset(0, 2),
+          )
+        ],
+      ),
       child: Column(
-        mainAxisAlignment: MainAxisAlignment.start, crossAxisAlignment: CrossAxisAlignment.stretch,
+        mainAxisAlignment: MainAxisAlignment.start,
+        crossAxisAlignment: CrossAxisAlignment.stretch,
         children: <Widget>[
           // Cheese List
           Expanded(
@@ -280,13 +280,30 @@ class _MyHomePageState extends State<MyHomePage> {
                       selectedCheese = cheeses[index];
                     });
                   },
-                  child: Container(margin: const EdgeInsets.symmetric(vertical: 8.0), padding: const EdgeInsets.all(12.0), decoration: BoxDecoration(color: Colors.white, borderRadius: BorderRadius.circular(8), border: Border.all(color: Colors.grey[300]!), boxShadow: [BoxShadow(color: Colors.grey.withOpacity(0.2), blurRadius: 3, offset: const Offset(0, 2))]),
+                  child: Container(
+                    margin: const EdgeInsets.symmetric(vertical: 8.0),
+                    padding: const EdgeInsets.all(12.0),
+                    decoration: BoxDecoration(color: Colors.white, borderRadius: BorderRadius.circular(8), border: Border.all(color: Colors.grey[300]!), boxShadow: [BoxShadow(color: Colors.grey.withOpacity(0.2), blurRadius: 3, offset: const Offset(0, 2))]),
                     child: Row(
                       children: [
                         // Display cheese image using imagePath property
-                        Image.asset(cheeses[index].imagePath, width: 24,height: 24,fit: BoxFit.cover),
+                        Image.asset(cheeses[index].imagePath, width: 24, height: 24, fit: BoxFit.cover),
                         const SizedBox(width: 12),
                         Expanded(child: Text(cheeses[index].name, style: const TextStyle(fontSize: 18, fontWeight: FontWeight.w600, fontFamily: 'Courier'))),
+                        // Modify button (icon)
+                        IconButton(
+                          icon: const Icon(Icons.edit, color: Colors.cyan),
+                          onPressed: () {
+                            // Modify logic to be implemented later
+                          },
+                        ),
+                        // Delete button (trash bin icon)
+                        IconButton(
+                          icon: const Icon(Icons.delete, color: Colors.grey),
+                          onPressed: () {
+                            // Delete logic to be implemented later
+                          },
+                        ),
                       ],
                     ),
                   ),
@@ -298,6 +315,7 @@ class _MyHomePageState extends State<MyHomePage> {
       ),
     );
   }
+
 
   @override
   Widget build(BuildContext context) {
