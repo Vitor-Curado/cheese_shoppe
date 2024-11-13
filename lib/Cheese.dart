@@ -4,7 +4,7 @@ import 'package:floor/floor.dart';
 @entity
 class Cheese {
   @primaryKey
-  final int id;
+  final int? id;
   final String name;
   final String origin;
   final String agingWindow;
@@ -18,7 +18,7 @@ class Cheese {
 
   // Constructor
   Cheese({
-    required this.id,
+    this.id,
     required this.name,
     required this.origin,
     required this.agingWindow,
@@ -51,7 +51,7 @@ class Cheese {
   // Creates a database from a map, typically returned by a database query
   factory Cheese.fromMap(Map<String, dynamic> map) {
     return Cheese(
-      id: map['id'] ,
+      id: map['id'],
       name: map['name'],
       origin: map['origin'],
       agingWindow: map['agingWindow'],
