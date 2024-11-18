@@ -5,16 +5,16 @@ import 'package:floor/floor.dart';
 class Cheese {
   @primaryKey
   final int? id;
-  final String name;
-  final String origin;
-  final String agingWindow;
-  final String animal;
-  final bool traditionallyRaw;
-  final String flavorProfile;
-  final String texture;
-  final String usage;
-  final String history;
-  final String imagePath;
+  String name;
+  String origin;
+  String agingWindow;
+  String animal;
+  bool traditionallyRaw;
+  String flavorProfile;
+  String texture;
+  String usage;
+  String history;
+  String imagePath;
 
   // Constructor
   Cheese({
@@ -30,6 +30,14 @@ class Cheese {
     required this.history,
     required this.imagePath,
   });
+
+  void setName(String name) {
+    this.name = name;
+  }
+
+  void setOrigin(String origin) {
+    this.origin = origin;
+  }
 
   // Converts cheese objects to a Map<String, dynamic> for database storage
   Map<String, dynamic> toMap() {

@@ -1,0 +1,10 @@
+{
+  "@@locale": "fr_FR",
+  "title": "La boutique de fromage tout à fait légitime de Tony Soprano",
+  "pleaseSelectCheese": "Monsieur, veuillez sélectionner un fromage dans la liste, oui ?",
+  "congratulationsMessage": "Félicitations, vous avez ajouté un fromage",
+  "areYouSure": "Êtes-vous sûr?",
+  "deleteWarning": "Ce fromage semble délicieux, avez-vous le cœur de le jeter?",
+  "cancel": "Annuler",
+  "delete": "Supprimer"
+}

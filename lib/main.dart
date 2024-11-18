@@ -1,35 +1,60 @@
-  import 'package:cheese_shoppe/AddCheesePage.dart';
-  import 'package:cheese_shoppe/CheeseDao.dart';
-  import 'package:cheese_shoppe/Database.dart';
-  import 'Cheese.dart';
-  import 'package:flutter/material.dart';
+// Pages
+import 'package:cheese_shoppe/AddCheesePage.dart';
+import 'package:cheese_shoppe/ModifyCheesePage.dart';
 
-  void main() async {
+// DAO and DB
+import 'package:cheese_shoppe/CheeseDao.dart';
+import 'package:cheese_shoppe/Database.dart';
+
+// Model
+import 'Cheese.dart';
+
+// Extra
+import 'package:flutter/material.dart';
+import 'package:flutter_localizations/flutter_localizations.dart';
+
+
+  void main() {
 
     // Run app as usual.
     runApp(const MyApp());
   }
 
-  class MyApp extends StatelessWidget {
+  class MyApp extends StatefulWidget {
     const MyApp({super.key});
+
+    static void setLocale(BuildContext context, Locale newLocale) async {
+      _MyAppState? state =context.findAncestorStateOfType<_MyAppState>();
+    }
+
+    @override
+    State<StatefulWidget> createState() { return _MyAppState(); }
+  }
+
+  class _MyAppState extends State<MyApp> {
+    var _locale = Locale('en', 'GB');
+
+    void changeLanguage(Locale newLocale) {
+      setState(() {
+        _locale = newLocale;
+      });
+    }
 
     @override
     Widget build(BuildContext context) {
-      return MaterialApp(
-        title: 'Cheese Factory',
-        debugShowCheckedModeBanner: false,
-        theme: ThemeData(
-          colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
-          useMaterial3: true,
-        ),
-        home: const MyHomePage(title: 'Tony Soprano\' totally legitimate cheese shop'),
-      );
-    }
+        return MaterialApp(
+          supportedLocales: const [Locale('en', 'GB'), Locale('zh', 'CN'), Locale('fr', 'FR')],
+          localizationsDelegates: const [GlobalMaterialLocalizations.delegate, GlobalWidgetsLocalizations.delegate, AppLocalizations.delegate; ],
+          locale: _locale,
+          title: 'Tony Soprano\'s cheese archives',
+          theme: ThemeData(colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepOrange), useMaterial3: true),
+          home: const MyHomePage(title: 'Tony Soprano\'s cheese archives'),
+        );
+  }
   }
 
   class MyHomePage extends StatefulWidget {
     const MyHomePage({super.key, required this.title});
-
     final String title;
 
     @override
@@ -49,8 +74,7 @@
      initDB();
     }
 
-    void initDB () async
-    {
+    void initDB () async {
       database = await $FloorAppDatabase.databaseBuilder('app_database.db').build();
       cheeseDao = database.cheeseDao;
 
@@ -65,7 +89,6 @@
     void dispose() {
       super.dispose();
     }
-
 
     // Big deal function that displays the entire she-bang with all the whistles
     // Heavily inspired by professor Ethan's teachings
@@ -244,8 +267,16 @@
                         child: Row(
                           mainAxisSize: MainAxisSize.min,
                           children: [
-                            IconButton(onPressed: () {
+                            IconButton(onPressed: () async {
+                              final isCheeseModified = await Navigator.push(context, MaterialPageRoute(builder: (context) => ModifyCheesePage(cheeseDao: cheeseDao, selectedCheese: selectedCheese!)));
+                              if (isCheeseModified) {
+                                var temp = await cheeseDao.getAllCheeses();
+                                setState(() {
+                                  cheeses = temp;
+                                });
 
+                                ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text('Congratulations, you have modified a cheese')));
+                              }
                             }, icon: const Icon(Icons.edit, color: Colors.blue)),
                             IconButton(onPressed: () {
                               showDialog(context: context, builder: (BuildContext context) {
@@ -330,9 +361,9 @@
       );
     }
 
-
     @override
     Widget build(BuildContext context) {
+
       return Scaffold(
         appBar: AppBar(
           backgroundColor: Theme.of(context).colorScheme.inversePrimary,
@@ -354,9 +385,13 @@
 
                       ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text('Congratulations, you have added a cheese')));
                     }
+
+                    else {
+
+                    }
                   },
-                icon: ClipOval(child: Image.asset('images/cheese-icon.jpeg', width: 36, height: 36, fit: BoxFit.cover)), label: const Text('Add cheese')),
-              )
+                icon: ClipOval(child: Container(width: 36, height: 36, color: Colors.grey[200], child: const Icon(Icons.add, size: 24, color: Colors.black))), label: const Text('Add cheese'),
+              ))
 
           ],
 

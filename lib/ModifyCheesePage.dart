@@ -1,17 +1,17 @@
 import 'package:cheese_shoppe/Cheese.dart';
 import 'package:cheese_shoppe/CheeseDao.dart';
 import 'package:flutter/material.dart';
-import 'package:cheese_shoppe/CheeseDao.dart';
-class AddCheesePage extends StatefulWidget {
+
+class ModifyCheesePage extends StatefulWidget {
+  const ModifyCheesePage({super.key, required this.cheeseDao, required this.selectedCheese});
+  final Cheese selectedCheese;
   final CheeseDao cheeseDao;
 
-  AddCheesePage({super.key, required this.cheeseDao});
   @override
-  AddCheesePageState createState() => AddCheesePageState();
+  State<ModifyCheesePage> createState() => _ModifyCheesePageState();
 }
 
-class AddCheesePageState extends State<AddCheesePage> {
-  // Initialize the TextEditingController variables
+class _ModifyCheesePageState extends State<ModifyCheesePage> {
   late TextEditingController name;
   late TextEditingController origin;
   late TextEditingController agingWindow;
@@ -24,14 +24,15 @@ class AddCheesePageState extends State<AddCheesePage> {
   @override
   void initState() {
     super.initState();
-    name = TextEditingController();
-    origin = TextEditingController();
-    agingWindow = TextEditingController();
-    animal = TextEditingController();
-    texture = TextEditingController();
-    flavorProfile = TextEditingController();
-    usage = TextEditingController();
-    history = TextEditingController();
+    // this way, the controllers are loaded with data already there.
+    name = TextEditingController(text: widget.selectedCheese.name);
+    origin = TextEditingController(text: widget.selectedCheese.origin);
+    agingWindow = TextEditingController(text: widget.selectedCheese.agingWindow);
+    animal = TextEditingController(text: widget.selectedCheese.animal);
+    texture = TextEditingController(text: widget.selectedCheese.texture);
+    flavorProfile = TextEditingController(text: widget.selectedCheese.flavorProfile);
+    usage = TextEditingController(text: widget.selectedCheese.usage);
+    history = TextEditingController(text: widget.selectedCheese.history);
   }
 
   @override
@@ -47,14 +48,27 @@ class AddCheesePageState extends State<AddCheesePage> {
     super.dispose();
   }
 
-  void tryInsertingCheese() async {
-    int result = await widget.cheeseDao.insertCheese(Cheese(name: name.text, origin: origin.text, agingWindow: agingWindow.text, animal: animal.text, traditionallyRaw: true, flavorProfile: flavorProfile.text, texture: texture.text, usage: usage.text, history: history.text, imagePath: 'images/cheese-icon.jpeg'));
+  void tryModifyingCheese() async {
+
+    Cheese modifiedCheese = widget.selectedCheese;
+
+
+    if (name.text.isNotEmpty) { modifiedCheese.name = name.text; }
+    if (origin.text.isNotEmpty) { modifiedCheese.origin = origin.text; }
+    if (agingWindow.text.isNotEmpty) { modifiedCheese.agingWindow = agingWindow.text; }
+    if (animal.text.isNotEmpty) { modifiedCheese.animal = animal.text; }
+    if (texture.text.isNotEmpty) { modifiedCheese.texture = texture.text; }
+    if (flavorProfile.text.isNotEmpty) { modifiedCheese.flavorProfile = flavorProfile.text; }
+    if (usage.text.isNotEmpty) { modifiedCheese.usage = usage.text; }
+    if (history.text.isNotEmpty) { modifiedCheese.history = history.text; }
+    int result = await widget.cheeseDao.updateCheese(modifiedCheese);
+
     if (result > 0) {
       Navigator.pop(context, true);
     }
 
     else {
-      ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text('Error: Cheese could not be added.')));
+      ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text('Error: Cheese could not be modified.')));
     }
   }
 
@@ -62,8 +76,10 @@ class AddCheesePageState extends State<AddCheesePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text("Add new cheese"),
-        leading: IconButton(onPressed: () { Navigator.pop(context, false); }, icon: const Icon(Icons.arrow_back))
+        title: const Text("Modify za cheese"),
+        leading: IconButton(onPressed: () {
+          Navigator.pop(context, false);
+        }, icon: const Icon(Icons.arrow_back))
       ),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
@@ -87,8 +103,8 @@ class AddCheesePageState extends State<AddCheesePage> {
             TextField(controller: history, decoration: const InputDecoration(labelText: "Please inform us of the history behind this cheese", border: OutlineInputBorder())),
             const SizedBox(height: 16),
             ElevatedButton(
-              onPressed: tryInsertingCheese,
-              child: const Text("Add Cheese"),
+              onPressed: tryModifyingCheese,
+              child: const Text("Modify za cheese"),
             ),
           ],
         ),

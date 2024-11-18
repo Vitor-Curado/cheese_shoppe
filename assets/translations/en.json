@@ -1,0 +1,10 @@
+{
+  "@@locale": "en_GB",
+  "title": "Tony Soprano's totally legitimate cheese shop",
+  "pleaseSelectCheese": "Monsieur, please select a cheese from the list, oui?",
+  "congratulationsMessage": "Congratulations, you have added a cheese",
+  "areYouSure": "Are you sure?",
+  "deleteWarning": "This cheese seems yummy, is it in your heart to discard it?",
+  "cancel": "Cancel",
+  "delete": "Delete"
+}
