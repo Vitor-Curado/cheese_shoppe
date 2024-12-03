@@ -1,7 +1,11 @@
+import 'package:cheese_shoppe/AppLocalizations.dart';
 import 'package:cheese_shoppe/Cheese.dart';
 import 'package:cheese_shoppe/CheeseDao.dart';
 import 'package:flutter/material.dart';
 
+/// A page that allows the user to modify the details of an existing cheese.
+/// It displays a form with pre-filled information of the selected cheese.
+/// The user is supposed to modify
 class ModifyCheesePage extends StatefulWidget {
   const ModifyCheesePage({super.key, required this.cheeseDao, required this.selectedCheese});
   final Cheese selectedCheese;
@@ -76,7 +80,7 @@ class _ModifyCheesePageState extends State<ModifyCheesePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text("Modify za cheese"),
+        title: Text(AppLocalizations.of(context)!.translate("modifyCheese")!),
         leading: IconButton(onPressed: () {
           Navigator.pop(context, false);
         }, icon: const Icon(Icons.arrow_back))
@@ -86,25 +90,25 @@ class _ModifyCheesePageState extends State<ModifyCheesePage> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            TextField(controller: name, decoration: const InputDecoration(labelText: "Name", border: OutlineInputBorder())),
+            TextField(controller: name, decoration: InputDecoration(labelText: AppLocalizations.of(context)!.translate("name"), border: const OutlineInputBorder())),
             const SizedBox(height: 16),
-            TextField(controller: origin, decoration: const InputDecoration(labelText: "Origin", border: OutlineInputBorder())),
+            TextField(controller: origin, decoration: InputDecoration(labelText: AppLocalizations.of(context)!.translate("origin"), border: const OutlineInputBorder())),
             const SizedBox(height: 16),
-            TextField(controller: agingWindow, decoration: const InputDecoration(labelText: "Do inform us of the aging Window", border: OutlineInputBorder())),
+            TextField(controller: agingWindow, decoration: InputDecoration(labelText: AppLocalizations.of(context)!.translate("agingWindow"), border: const OutlineInputBorder())),
             const SizedBox(height: 16),
-            TextField(controller: animal, decoration: const InputDecoration(labelText: "What animal did you milk?", border: OutlineInputBorder())),
+            TextField(controller: animal, decoration: InputDecoration(labelText: AppLocalizations.of(context)!.translate("animalMilked"), border: const OutlineInputBorder())),
             const SizedBox(height: 16),
-            TextField(controller: flavorProfile, decoration: const InputDecoration(labelText: "Tell us what does your cheese taste like", border: OutlineInputBorder())),
+            TextField(controller: flavorProfile, decoration: InputDecoration(labelText: AppLocalizations.of(context)!.translate("tasteLike"), border: const OutlineInputBorder())),
             const SizedBox(height: 16),
-            TextField(controller: texture, decoration: const InputDecoration(labelText: "Please inform us of this cheese's texture", border: OutlineInputBorder())),
+            TextField(controller: texture, decoration: InputDecoration(labelText: AppLocalizations.of(context)!.translate("textureLike"), border: const OutlineInputBorder())),
             const SizedBox(height: 16),
-            TextField(controller: usage, decoration: const InputDecoration(labelText: "Uses for this cheese that you can think of, old chap", border: OutlineInputBorder())),
+            TextField(controller: usage, decoration: InputDecoration(labelText: AppLocalizations.of(context)!.translate("usages"), border: const OutlineInputBorder())),
             const SizedBox(height: 16),
-            TextField(controller: history, decoration: const InputDecoration(labelText: "Please inform us of the history behind this cheese", border: OutlineInputBorder())),
+            TextField(controller: history, decoration: InputDecoration(labelText: AppLocalizations.of(context)!.translate("story"), border: const OutlineInputBorder())),
             const SizedBox(height: 16),
             ElevatedButton(
               onPressed: tryModifyingCheese,
-              child: const Text("Modify za cheese"),
+              child: Text(AppLocalizations.of(context)!.translate("modify")!),
             ),
           ],
         ),
